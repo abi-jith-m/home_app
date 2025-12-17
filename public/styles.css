@@ -760,7 +760,7 @@ iframe {
 }
 
 .main-content.sidebar-collapsed {
-    margin-left: 70px;
+    margin-left: 70px !important; /* Add !important */
 }
 
 .page {
@@ -1624,6 +1624,15 @@ iframe {
         padding: 12px 20px;
         flex-direction: row;
         justify-content: space-between;
+    }
+
+    .main-content {
+        margin-left: 250px;
+        padding: 20px 15px;
+    }
+    
+    .main-content.sidebar-collapsed {
+        margin-left: 70px !important;
     }
 
     .app-header h1 {
