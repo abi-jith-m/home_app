@@ -338,24 +338,20 @@ const LayoutModule = (function () {
   }
 
   function setupSidebarToggle() {
-    const sidebar = document.getElementById("sidebar");
-    const mainContent = document.querySelector(".main-content");
-    const sidebarToggle = document.getElementById("sidebarToggle");
-  
-    if (sidebarToggle && sidebar && mainContent) {
-      sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
-        sidebar.classList.toggle("show");
-        mainContent.classList.toggle("sidebar-collapsed");
-      });
-    } else {
-      console.error("Sidebar elements not found:", {
-        toggle: !!sidebarToggle,
-        sidebar: !!sidebar,
-        mainContent: !!mainContent
-      });
-    }
+    document.addEventListener("click", (e) => {
+      if (e.target.id === "sidebarToggle" || e.target.closest("#sidebarToggle")) {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.querySelector(".main-content");
+        
+        if (sidebar && mainContent) {
+          sidebar.classList.toggle("collapsed");
+          sidebar.classList.toggle("show");
+          mainContent.classList.toggle("sidebar-collapsed");
+        }
+      }
+    });
   }
+  
   
 
   function showPage(pageKey) {
