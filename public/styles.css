@@ -492,8 +492,10 @@ iframe {
     box-shadow: var(--shadow);
     transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 98;
-    overflow-y: auto;
+    overflow-y: auto; /* Allow sidebar to scroll if content is too long */
     transform: translateZ(0);
+    display: flex;
+    flex-direction: column; /* Add this */
 }
 
 .sidebar.collapsed {
@@ -613,7 +615,8 @@ iframe {
     width: 100%;
     margin: 0 auto;
     margin-left: 250px;
-    overflow-x: hidden;
+    overflow-y: auto; /* Allow main content to scroll */
+    height: calc(100vh - 80px); /* Set fixed height */
     transition: margin-left var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
