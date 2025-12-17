@@ -344,15 +344,13 @@ const LayoutModule = (function () {
     
     if (sidebarToggle && sidebar && mainContent) {
       sidebarToggle.addEventListener("click", () => {
-        // Remove conflicting classes first
-        if (window.innerWidth <= 575) {
-          // Mobile behavior
-          sidebar.classList.remove("collapsed");
-          mainContent.classList.remove("sidebar-collapsed");
+        const isMobile = window.innerWidth <= 575;
+        
+        if (isMobile) {
+          // Mobile: toggle show class only
           sidebar.classList.toggle("show");
         } else {
-          // Desktop behavior
-          sidebar.classList.remove("show");
+          // Desktop: toggle collapsed class
           sidebar.classList.toggle("collapsed");
           mainContent.classList.toggle("sidebar-collapsed");
         }
