@@ -342,19 +342,37 @@ const LayoutModule = (function () {
     const sidebar = document.getElementById("sidebar");
     const mainContent = document.querySelector(".main-content");
     
+    console.log("Sidebar Toggle Setup:", {
+      toggle: sidebarToggle,
+      sidebar: sidebar,
+      mainContent: mainContent,
+      width: window.innerWidth
+    });
+    
     if (sidebarToggle && sidebar && mainContent) {
-      sidebarToggle.addEventListener("click", () => {
+      sidebarToggle.addEventListener("click", (e) => {
+        e.preventDefault();
         const isMobile = window.innerWidth <= 575;
         
+        console.log("Toggle clicked!", {
+          isMobile: isMobile,
+          width: window.innerWidth,
+          sidebarClasses: sidebar.className
+        });
+        
         if (isMobile) {
-          // Mobile: toggle show class only
+          // Mobile behavior
           sidebar.classList.toggle("show");
+          console.log("After mobile toggle:", sidebar.className);
         } else {
-          // Desktop: toggle collapsed class
+          // Desktop behavior
           sidebar.classList.toggle("collapsed");
           mainContent.classList.toggle("sidebar-collapsed");
+          console.log("After desktop toggle:", sidebar.className, mainContent.className);
         }
       });
+    } else {
+      console.error("Missing elements!");
     }
   }
   
