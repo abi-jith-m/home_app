@@ -634,24 +634,41 @@ const DashboardModule = (function () {
 
   function filterByPeriod(expenses, period) {
     const now = new Date();
+    
+    // Helper function to get date in YYYY-MM-DD format
+    function getLocalDateString(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    
+    const todayStr = getLocalDateString(now);
+    
     return expenses.filter(e => {
-      const d = new Date(e.date + "T00:00:00");
+      const expenseDate = e.date; // Format: YYYY-MM-DD
+      
       if (period === "week") {
-        const diffDays = (now - d) / (1000 * 60 * 60 * 24);
-        return diffDays >= 0 && diffDays < 7;
+        const [year, month, day] = expenseDate.split('-').map(Number);
+        const d = new Date(year, month - 1, day);
+        const daysDiff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+        return daysDiff >= 0 && daysDiff < 7;
       }
+      
       if (period === "month") {
-        return (
-          d.getFullYear() === now.getFullYear() &&
-          d.getMonth() === now.getMonth()
-        );
+        const [year, month] = expenseDate.split('-').map(Number);
+        return year === now.getFullYear() && month === (now.getMonth() + 1);
       }
+      
       if (period === "year") {
-        return d.getFullYear() === now.getFullYear();
+        const [year] = expenseDate.split('-').map(Number);
+        return year === now.getFullYear();
       }
+      
       return false;
     });
   }
+
 
   function refreshRecent(expenses) {
     const recent = expenses.slice(0, 5);
@@ -872,6 +889,7 @@ const AnalyticsModule = (function () {
 })();
 
 // ========== Person Insights ==========
+// ========== Person Insights ==========
 const PersonInsightsModule = (function () {
   const grid = byId("personInsightsGrid");
   const buttons = document.querySelectorAll(".insight-view-btn");
@@ -916,26 +934,47 @@ const PersonInsightsModule = (function () {
 
   function getTotalForUserAndPeriod(userId, period, expenses) {
     const now = new Date();
+    
+    // Helper function to get date in YYYY-MM-DD format without timezone issues
+    function getLocalDateString(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+    
+    const todayStr = getLocalDateString(now);
+    
     return expenses
       .filter(e => e.paid_by === userId)
       .filter(e => {
-        const d = new Date(e.date + "T00:00:00");
+        const expenseDate = e.date; // Format: YYYY-MM-DD
+        
         if (period === "day") {
-          return d.toISOString().slice(0, 10) === now.toISOString().slice(0, 10);
+          // Compare date strings directly
+          return expenseDate === todayStr;
         }
+        
+        // For other periods, parse the date
+        const [year, month, day] = expenseDate.split('-').map(Number);
+        const d = new Date(year, month - 1, day); // month is 0-indexed
+        
         if (period === "week") {
-          const diffDays = (now - d) / (1000 * 60 * 60 * 24);
-          return diffDays >= 0 && diffDays < 7;
+          const daysDiff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+          return daysDiff >= 0 && daysDiff < 7;
         }
+        
         if (period === "month") {
           return (
             d.getFullYear() === now.getFullYear() &&
             d.getMonth() === now.getMonth()
           );
         }
+        
         if (period === "year") {
           return d.getFullYear() === now.getFullYear();
         }
+        
         return true;
       })
       .reduce((sum, e) => sum + parseFloat(e.amount), 0);
@@ -943,6 +982,7 @@ const PersonInsightsModule = (function () {
 
   return { init, refresh };
 })();
+
 
 // ========== To-Buy List ==========
 const ToBuyModule = (function () {
