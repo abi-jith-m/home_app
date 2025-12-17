@@ -340,12 +340,21 @@ const LayoutModule = (function () {
   function setupSidebarToggle() {
     const sidebar = document.querySelector(".sidebar");
     const mainContent = document.querySelector(".main-content");
-    const sidebarToggle = document.querySelector(".sidebar-toggle");
+    const sidebarToggle = document.getElementById("sidebarToggle"); // Changed from querySelector to getElementById
 
     if (sidebarToggle && sidebar && mainContent) {
       sidebarToggle.addEventListener("click", () => {
-        sidebar.classList.toggle("collapsed");
-        mainContent.classList.toggle("sidebar-collapsed");
+        // Check if we're on mobile (sidebar uses translateX)
+        const isMobile = window.innerWidth <= 575;
+        
+        if (isMobile) {
+          // On mobile, toggle .show class for slide in/out
+          sidebar.classList.toggle("show");
+        } else {
+          // On desktop, toggle .collapsed class
+          sidebar.classList.toggle("collapsed");
+          mainContent.classList.toggle("sidebar-collapsed");
+        }
       });
     }
   }
@@ -372,6 +381,7 @@ const LayoutModule = (function () {
 
   return { init, showPage };
 })();
+
 
 
 // ========== UI Helpers ==========
