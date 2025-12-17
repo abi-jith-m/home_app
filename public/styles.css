@@ -423,6 +423,8 @@ iframe {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    max-height: 100vh; /* Add this to prevent overflow */
+    overflow: hidden; /* Add this */
 }
 
 /* ========== Header with Glassmorphism ========== */
@@ -492,10 +494,11 @@ iframe {
     box-shadow: var(--shadow);
     transition: all var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 98;
-    overflow-y: auto; /* Allow sidebar to scroll if content is too long */
+    overflow-y: auto;
+    overflow-x: hidden;
     transform: translateZ(0);
     display: flex;
-    flex-direction: column; /* Add this */
+    flex-direction: column;
 }
 
 .sidebar.collapsed {
@@ -520,7 +523,10 @@ iframe {
 .sidebar-menu {
     padding: 10px 0;
     padding-bottom: 70px;
+    flex: 1;
+    overflow-y: auto; /* Allow menu to scroll if too many items */
 }
+
 
 .sidebar-btn {
     width: 100%;
@@ -615,8 +621,9 @@ iframe {
     width: 100%;
     margin: 0 auto;
     margin-left: 250px;
-    overflow-y: auto; /* Allow main content to scroll */
-    height: calc(100vh - 80px); /* Set fixed height */
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    overflow-x: hidden;
     transition: margin-left var(--transition-normal) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
