@@ -480,40 +480,6 @@
     <script src="/app.js"></script>
 
 
-    <script>
-        const ThemeManager = (function() {
-            const THEME_KEY = 'expense-tracker-theme';
-            function init() {
-                const toggleBtn = document.createElement('div');
-                toggleBtn.className = 'theme-toggle';
-                toggleBtn.innerHTML = '<div class="theme-toggle-slider">🌙</div>';
-                toggleBtn.onclick = () => {
-                    const theme = document.documentElement.getAttribute('data-theme');
-                    const newTheme = theme === 'dark' ? 'light' : 'dark';
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    localStorage.setItem(THEME_KEY, newTheme);
-                    toggleBtn.querySelector('div').innerHTML = newTheme === 'dark' ? '☀️' : '🌙';
-                };
-                document.body.appendChild(toggleBtn);
-                const saved = localStorage.getItem(THEME_KEY) || 'light';
-                document.documentElement.setAttribute('data-theme', saved);
-            }
-            return { init };
-        })();
-        ThemeManager.init();
 
-        // Sidebar Toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            
-            if (sidebarToggle && sidebar) {
-                sidebarToggle.addEventListener('click', () => {
-                    sidebar.classList.toggle('collapsed');
-                    document.querySelector('.main-content').classList.toggle('sidebar-collapsed');
-                });
-            }
-        });
-    </script>
 </body>
 </html>
