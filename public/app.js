@@ -141,16 +141,36 @@ const LoadingModule = (function() {
 
 // ========== Auth Module with JWT ==========
 const AuthModule = (function () {
-  const authSection = byId("authSection");
-  const appSection = byId("appSection");
-  const loginForm = byId("loginForm");
-  const usernameInput = byId("username");
-  const passwordInput = byId("password");
-  const currentUserSpan = byId("currentUser");
-  const currentRoleSpan = byId("currentRole");
-  const logoutBtn = byId("logoutBtn");
+  let authSection, appSection, loginForm, usernameInput, passwordInput;
+  let currentUserSpan, currentRoleSpan, logoutBtn;
 
   function init() {
+    // Get all DOM elements
+    authSection = byId("authSection");
+    appSection = byId("appSection");
+    loginForm = byId("loginForm");
+    usernameInput = byId("username");
+    passwordInput = byId("password");
+    currentUserSpan = byId("currentUser");
+    currentRoleSpan = byId("currentRole");
+    logoutBtn = byId("logoutBtn");
+
+    // Verify required elements exist
+    if (!authSection || !appSection || !loginForm) {
+      console.error('Critical auth elements not found');
+      return;
+    }
+
+    if (!usernameInput || !passwordInput) {
+      console.error('Login form inputs not found');
+      return;
+    }
+
+    if (!logoutBtn) {
+      console.error('Logout button not found');
+      return;
+    }
+
     setupTabs();
     loginForm.addEventListener("submit", onLogin);
     logoutBtn.addEventListener("click", onLogout);
@@ -211,6 +231,11 @@ const AuthModule = (function () {
   }
 
   function showApp(user) {
+    if (!authSection || !appSection || !currentUserSpan || !currentRoleSpan) {
+      console.error('Cannot show app - elements missing');
+      return;
+    }
+
     authSection.style.display = "none";
     appSection.style.display = "flex";
     currentUserSpan.textContent = user.full_name;
@@ -232,6 +257,11 @@ const AuthModule = (function () {
   }
 
   function showLogin() {
+    if (!authSection || !appSection) {
+      console.error('Cannot show login - elements missing');
+      return;
+    }
+
     authSection.style.display = "flex";
     appSection.style.display = "none";
   }
@@ -285,8 +315,8 @@ const AuthModule = (function () {
     AppState.toBuyItems = [];
 
     showLogin();
-    usernameInput.value = "";
-    passwordInput.value = "";
+    if (usernameInput) usernameInput.value = "";
+    if (passwordInput) passwordInput.value = "";
   }
 
   async function loadUsers() {
