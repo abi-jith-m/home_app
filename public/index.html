@@ -479,8 +479,10 @@
     </div>
 
 
+    <!-- Chart.js for modular charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/app.js"></script>
+
 
     <script>
         const ThemeManager = (function() {
@@ -503,6 +505,19 @@
             return { init };
         })();
         ThemeManager.init();
+
+        // Sidebar Toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            if (sidebarToggle && sidebar) {
+                sidebarToggle.addEventListener('click', () => {
+                    sidebar.classList.toggle('collapsed');
+                    document.querySelector('.main-content').classList.toggle('sidebar-collapsed');
+                });
+            }
+        });
     </script>
 </body>
 </html>
