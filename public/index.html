@@ -78,25 +78,23 @@
 
 
     <!-- Main Application -->
-    <div id="appSection" class="app-container" style="display: none;">
-        <!-- Header -->
-        <header class="app-header">
-            <div class="header-left">
-                <button class="sidebar-toggle" aria-label="Toggle Sidebar">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                </button>
-                <h1>Shared Home Expense Tracker</h1>
-            </div>
-            <div class="header-info">
-                <span id="currentUser"></span>
-                <span id="currentRole"></span>
-                <!-- Logout button removed from here -->
-            </div>
-        </header>
+    <header class="app-header">
+        <div class="header-left">
+            <button class="sidebar-toggle-btn" id="sidebarToggle" aria-label="Toggle Sidebar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+            <h1>Shared Home Expense Tracker</h1>
+        </div>
+        <div class="header-info">
+            <span id="currentUser"></span>
+            <span id="currentRole"></span>
+        </div>
+    </header>
+    
         
 
 
@@ -481,10 +479,8 @@
     </div>
 
 
-    <!-- Chart.js for modular charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/app.js"></script>
-
 
     <script>
         const ThemeManager = (function() {
@@ -507,19 +503,6 @@
             return { init };
         })();
         ThemeManager.init();
-
-        // Sidebar Toggle
-        document.addEventListener('DOMContentLoaded', () => {
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            
-            if (sidebarToggle && sidebar) {
-                sidebarToggle.addEventListener('click', () => {
-                    sidebar.classList.toggle('collapsed');
-                    document.querySelector('.main-content').classList.toggle('sidebar-collapsed');
-                });
-            }
-        });
     </script>
 </body>
 </html>
