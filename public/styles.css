@@ -273,14 +273,9 @@ iframe {
     margin-bottom: 32px;
 }
 /* ========== Auth Icon - Fixed Size ========== */
-/* ========== AUTH ICON FIX ========== */
 .auth-icon {
-    width: 64px !important;
-    height: 64px !important;
-    min-width: 64px;
-    min-height: 64px;
-    max-width: 64px;
-    max-height: 64px;
+    width: 64px;
+    height: 64px;
     margin: 0 auto 20px;
     background: linear-gradient(135deg, #2563eb, #3b82f6);
     border-radius: 16px;
@@ -289,155 +284,18 @@ iframe {
     justify-content: center;
     box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
     animation: pulse 2s ease-in-out infinite;
-    overflow: hidden;
 }
 
-.auth-icon svg {
+.auth-icon svg,
+.auth-icon i,
+.auth-icon * {
     width: 32px !important;
     height: 32px !important;
-    min-width: 32px !important;
-    min-height: 32px !important;
-    max-width: 32px !important;
-    max-height: 32px !important;
-}
-
-/* Input icons also need fixing */
-.input-icon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px !important;
-    height: 20px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    pointer-events: none;
-}
-
-.input-icon svg {
-    width: 20px !important;
-    height: 20px !important;
-    min-width: 20px !important;
-    min-height: 20px !important;
-    max-width: 20px !important;
-    max-height: 20px !important;
-}
-
-/* Input group styling */
-.input-group {
-    position: relative;
-    margin-bottom: 24px;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 14px 18px 14px 48px;
-    border: 2px solid var(--border-color);
-    background: var(--input-bg);
-    backdrop-filter: var(--backdrop-blur);
-    -webkit-backdrop-filter: var(--backdrop-blur);
-    border-radius: 12px;
-    font-size: 14px;
-    color: var(--text-color);
-    transition: all var(--transition-fast) ease;
-}
-
-.input-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-.input-group label {
-    position: absolute;
-    left: 48px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    color: var(--text-secondary);
-    transition: all 0.2s ease;
-    pointer-events: none;
-    background: var(--input-bg);
-    padding: 0 4px;
-}
-
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-    top: -8px;
-    font-size: 12px;
-    color: var(--primary-color);
-}
-
-/* Submit button styling */
-.auth-submit-btn {
-    width: 100%;
-    padding: 14px 24px;
-    background: linear-gradient(135deg, var(--primary-color), #8b5cf6);
+    font-size: 32px !important;
     color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: all var(--transition-fast) ease;
-    margin-top: 24px;
+    max-width: 32px;
+    max-height: 32px;
 }
-
-.auth-submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
-}
-
-.auth-submit-btn svg {
-    width: 20px !important;
-    height: 20px !important;
-    min-width: 20px !important;
-    max-width: 20px !important;
-}
-
-.auth-subtitle {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin-top: 8px;
-}
-
-/* Mobile adjustments */
-@media (max-width: 575px) {
-    .auth-icon {
-        width: 56px !important;
-        height: 56px !important;
-        min-width: 56px !important;
-        max-width: 56px !important;
-    }
-    
-    .auth-icon svg {
-        width: 28px !important;
-        height: 28px !important;
-        min-width: 28px !important;
-        max-width: 28px !important;
-    }
-    
-    .input-icon svg {
-        width: 18px !important;
-        height: 18px !important;
-    }
-    
-    .auth-box {
-        padding: 32px 24px;
-    }
-    
-    .auth-header h1 {
-        font-size: 22px;
-    }
-}
-
 
 @keyframes pulse {
     0%,
@@ -760,7 +618,7 @@ iframe {
 }
 
 .main-content.sidebar-collapsed {
-    margin-left: 70px !important; /* Add !important */
+    margin-left: 70px;
 }
 
 .page {
@@ -1624,15 +1482,6 @@ iframe {
         padding: 12px 20px;
         flex-direction: row;
         justify-content: space-between;
-    }
-
-    .main-content {
-        margin-left: 250px;
-        padding: 20px 15px;
-    }
-    
-    .main-content.sidebar-collapsed {
-        margin-left: 70px !important;
     }
 
     .app-header h1 {

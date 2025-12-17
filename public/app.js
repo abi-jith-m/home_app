@@ -338,44 +338,19 @@ const LayoutModule = (function () {
   }
 
   function setupSidebarToggle() {
-    const sidebarToggle = document.getElementById("sidebarToggle");
-    const sidebar = document.getElementById("sidebar");
-    const mainContent = document.querySelector(".main-content");
-    
-    console.log("Sidebar Toggle Setup:", {
-      toggle: sidebarToggle,
-      sidebar: sidebar,
-      mainContent: mainContent,
-      width: window.innerWidth
-    });
-    
-    if (sidebarToggle && sidebar && mainContent) {
-      sidebarToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        const isMobile = window.innerWidth <= 575;
+    document.addEventListener("click", (e) => {
+      if (e.target.id === "sidebarToggle" || e.target.closest("#sidebarToggle")) {
+        const sidebar = document.getElementById("sidebar");
+        const mainContent = document.querySelector(".main-content");
         
-        console.log("Toggle clicked!", {
-          isMobile: isMobile,
-          width: window.innerWidth,
-          sidebarClasses: sidebar.className
-        });
-        
-        if (isMobile) {
-          // Mobile behavior
-          sidebar.classList.toggle("show");
-          console.log("After mobile toggle:", sidebar.className);
-        } else {
-          // Desktop behavior
+        if (sidebar && mainContent) {
           sidebar.classList.toggle("collapsed");
+          sidebar.classList.toggle("show");
           mainContent.classList.toggle("sidebar-collapsed");
-          console.log("After desktop toggle:", sidebar.className, mainContent.className);
         }
-      });
-    } else {
-      console.error("Missing elements!");
-    }
+      }
+    });
   }
-  
   
   
 
