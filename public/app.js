@@ -8,6 +8,8 @@ const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:8000/api'
     : '/api';
 
+// ========== Configuration ==========
+
 // ========== Storage for current session ==========
 const AppState = {
   currentUser: null,
@@ -318,12 +320,10 @@ const AuthModule = (function () {
 })();
 
 // ========== Layout / Navigation ==========
+// ========== Layout / Navigation ==========
 const LayoutModule = (function () {
   const navButtons = document.querySelectorAll(".sidebar-btn");
   const pages = document.querySelectorAll(".page");
-  const sidebar = byId("sidebar");
-  const sidebarToggle = byId("sidebarToggle");
-  const mainContent = document.querySelector(".main-content");
 
   function init() {
     navButtons.forEach(btn => {
@@ -333,8 +333,16 @@ const LayoutModule = (function () {
       });
     });
 
-    // Sidebar toggle
-    if (sidebarToggle) {
+    // Sidebar toggle - Fixed
+    setupSidebarToggle();
+  }
+
+  function setupSidebarToggle() {
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+    const sidebarToggle = document.querySelector(".sidebar-toggle");
+
+    if (sidebarToggle && sidebar && mainContent) {
       sidebarToggle.addEventListener("click", () => {
         sidebar.classList.toggle("collapsed");
         mainContent.classList.toggle("sidebar-collapsed");
@@ -364,6 +372,7 @@ const LayoutModule = (function () {
 
   return { init, showPage };
 })();
+
 
 // ========== UI Helpers ==========
 const UIModule = (function () {
