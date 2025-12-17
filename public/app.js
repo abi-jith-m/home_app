@@ -338,26 +338,25 @@ const LayoutModule = (function () {
   }
 
   function setupSidebarToggle() {
-    const sidebar = document.querySelector(".sidebar");
+    const sidebar = document.getElementById("sidebar");
     const mainContent = document.querySelector(".main-content");
-    const sidebarToggle = document.getElementById("sidebarToggle"); // Changed from querySelector to getElementById
-
+    const sidebarToggle = document.getElementById("sidebarToggle");
+  
     if (sidebarToggle && sidebar && mainContent) {
       sidebarToggle.addEventListener("click", () => {
-        // Check if we're on mobile (sidebar uses translateX)
-        const isMobile = window.innerWidth <= 575;
-        
-        if (isMobile) {
-          // On mobile, toggle .show class for slide in/out
-          sidebar.classList.toggle("show");
-        } else {
-          // On desktop, toggle .collapsed class
-          sidebar.classList.toggle("collapsed");
-          mainContent.classList.toggle("sidebar-collapsed");
-        }
+        sidebar.classList.toggle("collapsed");
+        sidebar.classList.toggle("show");
+        mainContent.classList.toggle("sidebar-collapsed");
+      });
+    } else {
+      console.error("Sidebar elements not found:", {
+        toggle: !!sidebarToggle,
+        sidebar: !!sidebar,
+        mainContent: !!mainContent
       });
     }
   }
+  
 
   function showPage(pageKey) {
     navButtons.forEach(btn => {
