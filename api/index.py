@@ -15,7 +15,8 @@ from datetime import datetime, timedelta
 import os
 import jwt
 from jwt.exceptions import InvalidTokenError
-
+from dotenv import load_dotenv
+load_dotenv()
 # JWT Configuration
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-this-in-production-12345")
 ALGORITHM = "HS256"
